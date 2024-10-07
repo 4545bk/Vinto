@@ -1,0 +1,5 @@
+api-key=AIzaSyDLyXuEigGN9Q_PJXhdC6pu96kVbhIaY5g
+
+User ID=Wgz2F9B_hjflAKp8TdIekw
+
+Channel ID=UCWgz2F9B_hjflAKp8TdIekw

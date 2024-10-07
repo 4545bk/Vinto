@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Hamster from './icons/Hamster';
-import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, hamsterCoin, mainCharacter } from './images';
+ import { binanceLogo, dailyCipher, dailyCombo, dailyReward, dollarCoin, mainCharacter } from './images';
 import Info from './icons/Info';
 import Settings from './icons/Settings';
-import Mine from './icons/Mine';
+import Youtube from './icons/Youtube';
 import Friends from './icons/Friends';
 import Coins from './icons/Coins';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
+import YoutubeTask from './components/YoutubeTask';
+import FriendsModal from './components/FriendsModal';
+
+import neba from '../src/icons/icons8-won-64 (1).png'
+
+ 
 const App: React.FC = () => {
+  const [showFriendsModal, setShowFriendsModal] = useState(false);
+
   const levelNames = [
     "Bronze",    // From 0 to 4999 coins
     "Silver",    // From 5000 coins to 24,999 coins
@@ -23,27 +31,32 @@ const App: React.FC = () => {
   ];
 
   const levelMinPoints = [
-    0,        // Bronze
-    5000,     // Silver
-    25000,    // Gold
-    100000,   // Platinum
-    1000000,  // Diamond
-    2000000,  // Epic
-    10000000, // Legendary
-    50000000, // Master
-    100000000,// GrandMaster
-    1000000000// Lord
+    2000000000,        // Bronze
+    5000000000,     // Silver
+    7000000000,    // Gold
+    10000000000,   // Platinum
+    12000000000,  // Diamond
+    15000000000,  // Epic
+    18000000000, // Legendary
+    21000000000, // Master
+    24000000000,// GrandMaster
+    27000000000//  
   ];
 
   const [levelIndex, setLevelIndex] = useState(6);
-  const [points, setPoints] = useState(22749365);
+  const [points, setPoints] = useState(1000);
   const [clicks, setClicks] = useState<{ id: number, x: number, y: number }[]>([]);
+  
+  
   const pointsToAdd = 11;
   const profitPerHour = 126420;
 
   const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
   const [dailyCipherTimeLeft, setDailyCipherTimeLeft] = useState("");
   const [dailyComboTimeLeft, setDailyComboTimeLeft] = useState("");
+
+  const navigate = useNavigate(); // useNavigate for programmatic navigation
+
 
   const calculateTimeLeft = (targetHour: number) => {
     const now = new Date();
@@ -77,6 +90,38 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    // Load points and levelIndex from local storage on component mount
+    const storedPoints = localStorage.getItem('points');
+    const storedLevelIndex = localStorage.getItem('levelIndex');
+
+    if (storedPoints) {
+      setPoints(Number(storedPoints));
+      console.log("Loaded points from localStorage:", storedPoints);
+    } else {
+      console.log("No points found in localStorage.");
+    }
+    if (storedLevelIndex) {
+      setLevelIndex(Number(storedLevelIndex));
+      console.log("Loaded levelIndex from localStorage:", storedLevelIndex);
+    } else {
+      console.log("No levelIndex found in localStorage.");
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save points and levelIndex to local storage whenever they change
+    localStorage.setItem('points', points.toString());
+    localStorage.setItem('levelIndex', levelIndex.toString());
+    console.log("Saved points to localStorage:", points);
+    console.log("Saved levelIndex to localStorage:", levelIndex);
+  }, [points, levelIndex]);
+
+
+
+
+
+  
   const handleCardClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -130,27 +175,33 @@ const App: React.FC = () => {
     return () => clearInterval(interval);
   }, [profitPerHour]);
 
+  
+
+  
+  
+
+
   return (
     <div className="bg-black flex justify-center">
       <div className="w-full bg-black text-white h-screen font-bold flex flex-col max-w-xl">
         <div className="px-4 z-10">
           <div className="flex items-center space-x-2 pt-4">
-            <div className="p-1 rounded-lg bg-[#1d2025]">
-              <Hamster size={24} className="text-[#d4d4d4]" />
+            <div className="p-1 rounded-lg bg-[#315eac]">
+               <img src={neba} px-3></img>
             </div>
             <div>
-              <p className="text-sm">Nikandr (CEO)</p>
+              <p className="text-lg">Vinto Coin (Win coin)</p>
             </div>
           </div>
-          <div className="flex items-center justify-between space-x-4 mt-1">
-            <div className="flex items-center w-1/3">
+          <div className="flex items-center justify-between space-x-4 mt-2">
+            <div className="flex items-center w-1/2">
               <div className="w-full">
                 <div className="flex justify-between">
                   <p className="text-sm">{levelNames[levelIndex]}</p>
-                  <p className="text-sm">{levelIndex + 1} <span className="text-[#95908a]">/ {levelNames.length}</span></p>
+                  <p className="text-sm">{levelIndex + 1} <span className="text-[#ffffff]">/ {levelNames.length}</span></p>
                 </div>
-                <div className="flex items-center mt-1 border-2 border-[#43433b] rounded-full">
-                  <div className="w-full h-2 bg-[#43433b]/[0.6] rounded-full">
+                <div className="flex items-center mt-1 border-2 border-[#ffffff] rounded-full">
+                  <div className="w-full h-2 bg-[#ffffff]/[0.6] rounded-full">
                     <div className="progress-gradient h-2 rounded-full" style={{ width: `${calculateProgress()}%` }}></div>
                   </div>
                 </div>
@@ -160,6 +211,7 @@ const App: React.FC = () => {
               <img src={binanceLogo} alt="Exchange" className="w-8 h-8" />
               <div className="h-[32px] w-[2px] bg-[#43433b] mx-2"></div>
               <div className="flex-1 text-center">
+
                 <p className="text-xs text-[#85827d] font-medium">Profit per hour</p>
                 <div className="flex items-center justify-center space-x-1">
                   <img src={dollarCoin} alt="Dollar Coin" className="w-[18px] h-[18px]" />
@@ -167,32 +219,32 @@ const App: React.FC = () => {
                   <Info size={20} className="text-[#43433b]" />
                 </div>
               </div>
-              <div className="h-[32px] w-[2px] bg-[#43433b] mx-2"></div>
-              <Settings className="text-white" />
+              <div className="h-[52px] w-[99px] bg-[#43433b] mx-2"></div>
+              <Settings className="text-black" />
             </div>
           </div>
         </div>
 
         <div className="flex-grow mt-4 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0">
-          <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-[#1d2025] rounded-t-[46px]">
+          <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-[#7d1717] rounded-t-[46px]">
             <div className="px-4 mt-6 flex justify-between gap-2">
-              <div className="bg-[#272a2f] rounded-lg px-4 py-2 w-full relative">
+              <div className="bg-[#0f1150d1] rounded-lg px-4 py-2 w-full relative">
                 <div className="dot"></div>
                 <img src={dailyReward} alt="Daily Reward" className="mx-auto w-12 h-12" />
-                <p className="text-[10px] text-center text-white mt-1">Daily reward</p>
-                <p className="text-[10px] font-medium text-center text-gray-400 mt-2">{dailyRewardTimeLeft}</p>
+                <p className="text-[21px] text-center text-white mt-1">Start</p>
+                <p className="text-[0px] font-thin text-center text-gray-400 mt-2">{dailyRewardTimeLeft}</p>
               </div>
-              <div className="bg-[#272a2f] rounded-lg px-4 py-2 w-full relative">
+              <div className="bg-[#0f1150d1] rounded-lg px-4 py-2 w-full relative">
                 <div className="dot"></div>
                 <img src={dailyCipher} alt="Daily Cipher" className="mx-auto w-12 h-12" />
-                <p className="text-[10px] text-center text-white mt-1">Daily cipher</p>
-                <p className="text-[10px] font-medium text-center text-gray-400 mt-2">{dailyCipherTimeLeft}</p>
+                <p className="text-[21px] text-center text-white mt-1">Play</p>
+                <p className="text-[0px] font-medium text-center text-gray-400 mt-2">{dailyCipherTimeLeft}</p>
               </div>
-              <div className="bg-[#272a2f] rounded-lg px-4 py-2 w-full relative">
+              <div className="bg-[#0f1150d1] rounded-lg px-4 py-2 w-full relative">
                 <div className="dot"></div>
                 <img src={dailyCombo} alt="Daily Combo" className="mx-auto w-12 h-12" />
-                <p className="text-[10px] text-center text-white mt-1">Daily combo</p>
-                <p className="text-[10px] font-medium text-center text-gray-400 mt-2">{dailyComboTimeLeft}</p>
+                <p className="text-[21px] text-center text-white mt-1">Win</p>
+                <p className="text-[0px] font-medium text-center text-gray-400 mt-2">{dailyComboTimeLeft}</p>
               </div>
             </div>
 
@@ -200,6 +252,8 @@ const App: React.FC = () => {
               <div className="px-4 py-2 flex items-center space-x-2">
                 <img src={dollarCoin} alt="Dollar Coin" className="w-10 h-10" />
                 <p className="text-4xl text-white">{points.toLocaleString()}</p>
+                <p>Points: {points}</p>
+                <p>Level: {levelNames[levelIndex]}</p>
               </div>
             </div>
 
@@ -218,28 +272,37 @@ const App: React.FC = () => {
       </div>
 
       {/* Bottom fixed div */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs">
-        <div className="text-center text-[#85827d] w-1/5 bg-[#1c1f24] m-1 p-2 rounded-2xl">
-          <img src={binanceLogo} alt="Exchange" className="w-8 h-8 mx-auto" />
-          <p className="mt-1">Exchange</p>
-        </div>
-        <div className="text-center text-[#85827d] w-1/5">
-          <Mine className="w-8 h-8 mx-auto" />
-          <p className="mt-1">Mine</p>
-        </div>
-        <div className="text-center text-[#85827d] w-1/5">
-          <Friends className="w-8 h-8 mx-auto" />
-          <p className="mt-1">Friends</p>
-        </div>
-        <div className="text-center text-[#85827d] w-1/5">
-          <Coins className="w-8 h-8 mx-auto" />
-          <p className="mt-1">Earn</p>
-        </div>
-        <div className="text-center text-[#85827d] w-1/5">
-          <img src={hamsterCoin} alt="Airdrop" className="w-8 h-8 mx-auto" />
-          <p className="mt-1">Airdrop</p>
-        </div>
-      </div>
+      {/* Bottom fixed div */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs border border-[#ffddc1] shadow-lg shadow-[#ffddc1]/40">
+      <div
+  className="text-center text-[#BA3537] w-1/5 cursor-pointer hover:border-2 hover:border-[#BA3537] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#BA3537]/50 rounded-xl p-2"
+  onClick={() => navigate('/youtube-task')} // Navigate to YoutubeTask when the YouTube icon is clicked
+>
+  <Youtube size={20} className="w-16 h-10 mx-auto pt-1" />
+  <p className="mt-1 text-[#FFFFFF] pb-5">Task</p>
+</div>
+
+ 
+<div
+  className="text-center text-[#BA3537] w-1/5 cursor-pointer hover:border-2 hover:border-[#85827d] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#85827d]/50 rounded-xl p-2"
+  onClick={() => setShowFriendsModal(true)} // Open the FriendsModal
+>
+  <Friends className="w-8 h-8 mx-auto" />
+  <p className="mt-1 text-[#FFFFFF]">Friends</p>
+</div>
+
+ 
+   <div className="text-center text-[#BA3537] w-1/5 hover:border-2 hover:border-[#85827d] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#85827d]/50 rounded-xl p-2">
+     <Coins className="w-8 h-8 mx-auto" />
+     <p className="mt-1 text-[#FFFFFF]">Earn</p>
+   </div>
+ </div>
+    <Routes>
+      <Route path="/" element={<div>Home Page</div>} /> {/* Replace with your actual home page */}
+      <Route path="/youtube-task" element={<YoutubeTask />} /> {/* Add this for the YouTube task page */}
+ 
+    </Routes>
+
 
       {clicks.map((click) => (
         <div
@@ -255,8 +318,15 @@ const App: React.FC = () => {
           {pointsToAdd}
         </div>
       ))}
+      {showFriendsModal && (
+  <FriendsModal onClose={() => setShowFriendsModal(false)} />
+)}
+
+      
     </div>
   );
 };
 
 export default App;
+
+
