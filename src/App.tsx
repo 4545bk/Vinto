@@ -44,11 +44,11 @@ const App: React.FC = () => {
   ];
 
   const [levelIndex, setLevelIndex] = useState(6);
-  const [points, setPoints] = useState(1000);
+  const [points, setPoints] = useState(2457035420);
   const [clicks, setClicks] = useState<{ id: number, x: number, y: number }[]>([]);
   
   
-  const pointsToAdd = 11;
+  const pointsToAdd = 26;
   const profitPerHour = 126420;
 
   const [dailyRewardTimeLeft, setDailyRewardTimeLeft] = useState("");
@@ -252,9 +252,7 @@ const App: React.FC = () => {
               <div className="px-4 py-2 flex items-center space-x-2">
                 <img src={dollarCoin} alt="Dollar Coin" className="w-10 h-10" />
                 <p className="text-4xl text-white">{points.toLocaleString()}</p>
-                <p>Points: {points}</p>
-                <p>Level: {levelNames[levelIndex]}</p>
-              </div>
+               </div>
             </div>
 
             <div className="px-4 mt-4 flex justify-center">
