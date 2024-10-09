@@ -219,13 +219,13 @@ const App: React.FC = () => {
                   <Info size={20} className="text-[#43433b]" />
                 </div>
               </div>
-              <div className="h-[52px] w-[99px] bg-[#43433b] mx-2"></div>
+              <div className="h-[2px] w-[209px] bg-[#43433b] mx-20"></div>
               <Settings className="text-black" />
             </div>
           </div>
         </div>
 
-        <div className="flex-grow mt-4 bg-[#f3ba2f] rounded-t-[48px] relative top-glow z-0">
+        <div className="flex-grow mt-4 bg-[#f3ba2f] rounded-t-[408px] relative top-glow z-0">
           <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-[#7d1717] rounded-t-[46px]">
             <div className="px-4 mt-6 flex justify-between gap-2">
               <div className="bg-[#0f1150d1] rounded-lg px-4 py-2 w-full relative">
@@ -296,8 +296,7 @@ const App: React.FC = () => {
    </div>
  </div>
     <Routes>
-      <Route path="/" element={<div>Home Page</div>} /> {/* Replace with your actual home page */}
-      <Route path="/youtube-task" element={<YoutubeTask />} /> {/* Add this for the YouTube task page */}
+       <Route path="/youtube-task" element={<YoutubeTask />} /> {/* Add this for the YouTube task page */}
  
     </Routes>
 
