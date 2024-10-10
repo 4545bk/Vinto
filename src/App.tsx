@@ -6,10 +6,9 @@ import Settings from './icons/Settings';
 import Youtube from './icons/Youtube';
 import Friends from './icons/Friends';
 import Coins from './icons/Coins';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
-import YoutubeTask from './components/YoutubeTask';
-import FriendsModal from './components/FriendsModal';
+ import FriendsModal from './components/FriendsModal';
 
 import neba from '../src/icons/icons8-won-64 (1).png'
 
@@ -225,7 +224,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex-grow mt-4 bg-[#f3ba2f] rounded-t-[408px] relative top-glow z-0">
+        <div className="flex-grow mt-1 bg-[#f3ba2f] rounded-t-[408px] relative top-glow z-0">
           <div className="absolute top-[2px] left-0 right-0 bottom-0 bg-[#7d1717] rounded-t-[46px]">
             <div className="px-4 mt-6 flex justify-between gap-2">
               <div className="bg-[#0f1150d1] rounded-lg px-4 py-2 w-full relative">
@@ -271,34 +270,32 @@ const App: React.FC = () => {
 
       {/* Bottom fixed div */}
       {/* Bottom fixed div */}
-      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#272a2f] flex justify-around items-center z-50 rounded-3xl text-xs border border-[#ffddc1] shadow-lg shadow-[#ffddc1]/40">
-      <div
-  className="text-center text-[#BA3537] w-1/5 cursor-pointer hover:border-2 hover:border-[#BA3537] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#BA3537]/50 rounded-xl p-2"
-  onClick={() => navigate('/youtube-task')} // Navigate to YoutubeTask when the YouTube icon is clicked
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-[calc(100%-2rem)] max-w-xl bg-[#1d1e24] flex justify-around items-center z-50 rounded-3xl text-xs border border-[#ffddc1] shadow-lg shadow-[#ffddc1]/40">
+
+<div
+  className="text-center text-[#f5b301] pl-1 w-1/5 cursor-pointer border-2 border-transparent hover:border-[#f5b301] transition-transform duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-[#f5b301]/80 rounded-xl p-3"
+  onClick={() => navigate('/youtube-task')}
 >
-  <Youtube size={20} className="w-16 h-10 mx-auto pt-1" />
-  <p className="mt-1 text-[#FFFFFF] pb-5">Task</p>
+  <Youtube size={24} className="w-16 h-10 mx-auto pt-1" />
+  <p className="mt-1 text-[#FFFFFF] pb-18 pl-0 ">Task</p>
 </div>
 
- 
 <div
-  className="text-center text-[#BA3537] w-1/5 cursor-pointer hover:border-2 hover:border-[#85827d] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#85827d]/50 rounded-xl p-2"
-  onClick={() => setShowFriendsModal(true)} // Open the FriendsModal
+  className="text-center text-[#f5b301] w-1/5 cursor-pointer border-2 border-transparent hover:border-[#f5b301] transition-transform duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-[#f5b301]/80 rounded-xl p-3"
+  onClick={() => setShowFriendsModal(true)}
 >
   <Friends className="w-8 h-8 mx-auto" />
   <p className="mt-1 text-[#FFFFFF]">Friends</p>
 </div>
 
- 
-   <div className="text-center text-[#BA3537] w-1/5 hover:border-2 hover:border-[#85827d] transition-transform duration-300 transform hover:scale-105 hover:shadow-md hover:shadow-[#85827d]/50 rounded-xl p-2">
-     <Coins className="w-8 h-8 mx-auto" />
-     <p className="mt-1 text-[#FFFFFF]">Earn</p>
-   </div>
- </div>
-    <Routes>
-       <Route path="/youtube-task" element={<YoutubeTask />} /> {/* Add this for the YouTube task page */}
- 
-    </Routes>
+<div
+  className="text-center text-[#f5b301] w-1/5 cursor-pointer border-2 border-transparent hover:border-[#f5b301] transition-transform duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-[#f5b301]/80 rounded-xl p-3"
+  onClick={() => navigate('/earn-coins')}
+>
+  <Coins className="w-8 h-8 mx-auto" />
+  <p className="mt-1 text-[#FFFFFF]">Earn</p>
+</div>
+</div>
 
 
       {clicks.map((click) => (
